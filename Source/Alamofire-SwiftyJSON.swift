@@ -7,9 +7,10 @@
 //
 
 import Foundation
-
+#if COCOAPODS
 import Alamofire
 import SwiftyJSON
+#endif
 
 // MARK: - Request for Swift JSON
 
