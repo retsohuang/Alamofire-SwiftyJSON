@@ -10,6 +10,9 @@ import Foundation
 #if COCOAPODS
 import Alamofire
 import SwiftyJSON
+  public typealias JSONType = SwiftyJSON.JSON
+#else
+  public typealias JSONType = JSON
 #endif
 
 // MARK: - Request for Swift JSON
@@ -23,7 +26,7 @@ extension Request {
     
     :returns: The request.
     */
-    public func responseSwiftyJSON(completionHandler: (NSURLRequest, NSHTTPURLResponse?, SwiftyJSON.JSON, NSError?) -> Void) -> Self {
+    public func responseSwiftyJSON(completionHandler: (NSURLRequest, NSHTTPURLResponse?, JSONType, NSError?) -> Void) -> Self {
         return responseSwiftyJSON(queue:nil, options:NSJSONReadingOptions.AllowFragments, completionHandler:completionHandler)
     }
     
@@ -46,7 +49,7 @@ extension Request {
                 if error != nil || object == nil{
                     responseJSON = JSON.nullJSON
                 } else {
-                    responseJSON = SwiftyJSON.JSON(object!)
+                    responseJSON = JSONType(object!)
                 }
                 
                 dispatch_async(queue ?? dispatch_get_main_queue(), {
